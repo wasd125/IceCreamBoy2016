@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour {
 
         fader.Show(currentDay);
 
-        for (int i = 1; i < 7; i++)
+        for (int i = 1; i < 4; i++)
         {
             days.Add(new Day(i));
         }
@@ -224,6 +224,7 @@ public class GameController : MonoBehaviour {
 
         if (PressbarResult != EnumPressBarResult.Waiting)
         {
+            if (overallPoints < 0) overallPoints = 0;
             TransitionToNextState(0.3f);
             PressbarResult = EnumPressBarResult.Waiting;
             eisBuilder.PlaceTuete();
@@ -250,23 +251,27 @@ public class GameController : MonoBehaviour {
                 scoreControl.ShowScore((float)overallPoints);
                 Skillbar.Hide();
                 HideIceButtons();
+                if (overallPoints < 0) overallPoints = 0;
                 break;
             case EnumPressBarResult.Good:
                 overallPoints += 10;
                 scoreControl.ShowScore((float)overallPoints);
                 Skillbar.Hide();
                 HideIceButtons();
+                if (overallPoints < 0) overallPoints = 0;
                 break;
             case EnumPressBarResult.Perfect:
                 overallPoints += 20;
                 scoreControl.ShowScore((float)overallPoints);
                 Skillbar.Hide();
                 HideIceButtons();
+                if (overallPoints < 0) overallPoints = 0;
                 break;
         }
 
         if (playersInputs.Count == wish.wishKugeln.Count)
         {
+            if (overallPoints < 0) overallPoints = 0;
             eisBuilder.InDenStaender();
             wish.ShowWish();
             TransitionToNextState(0.5f);
@@ -274,6 +279,7 @@ public class GameController : MonoBehaviour {
         else
         if (PressbarResult !=  EnumPressBarResult.Waiting)
         {
+            if (overallPoints < 0) overallPoints = 0;
             gameState = EnumGameState.PreparePickIce;
             PressbarResult = EnumPressBarResult.Waiting;
         }
@@ -309,11 +315,13 @@ public class GameController : MonoBehaviour {
                 )
             {
                 overallPoints += 5;
+                if (overallPoints < 0) overallPoints = 0;
                 scoreControl.ShowScore((float)overallPoints);
             }
             else
             {
                 overallPoints -= 25;
+                if (overallPoints < 0) overallPoints = 0;
                 scoreControl.ShowScore((float)overallPoints);
             }
         }

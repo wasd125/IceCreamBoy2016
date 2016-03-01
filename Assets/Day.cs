@@ -25,8 +25,8 @@ public class Day {
 
     public int GetAnzahlBoys()
     {
-        //return DayNumber * 5;
-        return 1;
+        return 3 +( DayNumber * 2);
+        //return 1;
     }
 
     public int GetAnzahlKugeln()
